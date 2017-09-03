@@ -46,7 +46,7 @@
      o If you want to be informed about updates and news, please sign-in to our mailing list:
        https://survey.gov.il/he/survey/1201
 
-     o Contact detials:
+     o Contact details:
 		- Phone: 02-6705636
 		- Website: economy.gov.il
 		- Address: National Economic Council, Prime Minister Office
