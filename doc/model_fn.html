@@ -1,0 +1,944 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+
+<title>Regional Population Projections for Israel - Functions</title>
+
+<script type="text/javascript">
+window.onload = function() {
+  var imgs = document.getElementsByTagName('img'), i, img;
+  for (i = 0; i < imgs.length; i++) {
+    img = imgs[i];
+    // center an image if it is the only element of its parent
+    if (img.parentElement.childElementCount === 1)
+      img.parentElement.style.textAlign = 'center';
+  }
+};
+</script>
+
+<!-- Styles for R syntax highlighter -->
+<style type="text/css">
+   pre .operator,
+   pre .paren {
+     color: rgb(104, 118, 135)
+   }
+
+   pre .literal {
+     color: #990073
+   }
+
+   pre .number {
+     color: #099;
+   }
+
+   pre .comment {
+     color: #998;
+     font-style: italic
+   }
+
+   pre .keyword {
+     color: #900;
+     font-weight: bold
+   }
+
+   pre .identifier {
+     color: rgb(0, 0, 0);
+   }
+
+   pre .string {
+     color: #d14;
+   }
+</style>
+
+<!-- R syntax highlighter -->
+<script type="text/javascript">
+var hljs=new function(){function m(p){return p.replace(/&/gm,"&amp;").replace(/</gm,"&lt;")}function f(r,q,p){return RegExp(q,"m"+(r.cI?"i":"")+(p?"g":""))}function b(r){for(var p=0;p<r.childNodes.length;p++){var q=r.childNodes[p];if(q.nodeName=="CODE"){return q}if(!(q.nodeType==3&&q.nodeValue.match(/\s+/))){break}}}function h(t,s){var p="";for(var r=0;r<t.childNodes.length;r++){if(t.childNodes[r].nodeType==3){var q=t.childNodes[r].nodeValue;if(s){q=q.replace(/\n/g,"")}p+=q}else{if(t.childNodes[r].nodeName=="BR"){p+="\n"}else{p+=h(t.childNodes[r])}}}if(/MSIE [678]/.test(navigator.userAgent)){p=p.replace(/\r/g,"\n")}return p}function a(s){var r=s.className.split(/\s+/);r=r.concat(s.parentNode.className.split(/\s+/));for(var q=0;q<r.length;q++){var p=r[q].replace(/^language-/,"");if(e[p]){return p}}}function c(q){var p=[];(function(s,t){for(var r=0;r<s.childNodes.length;r++){if(s.childNodes[r].nodeType==3){t+=s.childNodes[r].nodeValue.length}else{if(s.childNodes[r].nodeName=="BR"){t+=1}else{if(s.childNodes[r].nodeType==1){p.push({event:"start",offset:t,node:s.childNodes[r]});t=arguments.callee(s.childNodes[r],t);p.push({event:"stop",offset:t,node:s.childNodes[r]})}}}}return t})(q,0);return p}function k(y,w,x){var q=0;var z="";var s=[];function u(){if(y.length&&w.length){if(y[0].offset!=w[0].offset){return(y[0].offset<w[0].offset)?y:w}else{return w[0].event=="start"?y:w}}else{return y.length?y:w}}function t(D){var A="<"+D.nodeName.toLowerCase();for(var B=0;B<D.attributes.length;B++){var C=D.attributes[B];A+=" "+C.nodeName.toLowerCase();if(C.value!==undefined&&C.value!==false&&C.value!==null){A+='="'+m(C.value)+'"'}}return A+">"}while(y.length||w.length){var v=u().splice(0,1)[0];z+=m(x.substr(q,v.offset-q));q=v.offset;if(v.event=="start"){z+=t(v.node);s.push(v.node)}else{if(v.event=="stop"){var p,r=s.length;do{r--;p=s[r];z+=("</"+p.nodeName.toLowerCase()+">")}while(p!=v.node);s.splice(r,1);while(r<s.length){z+=t(s[r]);r++}}}}return z+m(x.substr(q))}function j(){function q(x,y,v){if(x.compiled){return}var u;var s=[];if(x.k){x.lR=f(y,x.l||hljs.IR,true);for(var w in x.k){if(!x.k.hasOwnProperty(w)){continue}if(x.k[w] instanceof Object){u=x.k[w]}else{u=x.k;w="keyword"}for(var r in u){if(!u.hasOwnProperty(r)){continue}x.k[r]=[w,u[r]];s.push(r)}}}if(!v){if(x.bWK){x.b="\\b("+s.join("|")+")\\s"}x.bR=f(y,x.b?x.b:"\\B|\\b");if(!x.e&&!x.eW){x.e="\\B|\\b"}if(x.e){x.eR=f(y,x.e)}}if(x.i){x.iR=f(y,x.i)}if(x.r===undefined){x.r=1}if(!x.c){x.c=[]}x.compiled=true;for(var t=0;t<x.c.length;t++){if(x.c[t]=="self"){x.c[t]=x}q(x.c[t],y,false)}if(x.starts){q(x.starts,y,false)}}for(var p in e){if(!e.hasOwnProperty(p)){continue}q(e[p].dM,e[p],true)}}function d(B,C){if(!j.called){j();j.called=true}function q(r,M){for(var L=0;L<M.c.length;L++){if((M.c[L].bR.exec(r)||[null])[0]==r){return M.c[L]}}}function v(L,r){if(D[L].e&&D[L].eR.test(r)){return 1}if(D[L].eW){var M=v(L-1,r);return M?M+1:0}return 0}function w(r,L){return L.i&&L.iR.test(r)}function K(N,O){var M=[];for(var L=0;L<N.c.length;L++){M.push(N.c[L].b)}var r=D.length-1;do{if(D[r].e){M.push(D[r].e)}r--}while(D[r+1].eW);if(N.i){M.push(N.i)}return f(O,M.join("|"),true)}function p(M,L){var N=D[D.length-1];if(!N.t){N.t=K(N,E)}N.t.lastIndex=L;var r=N.t.exec(M);return r?[M.substr(L,r.index-L),r[0],false]:[M.substr(L),"",true]}function z(N,r){var L=E.cI?r[0].toLowerCase():r[0];var M=N.k[L];if(M&&M instanceof Array){return M}return false}function F(L,P){L=m(L);if(!P.k){return L}var r="";var O=0;P.lR.lastIndex=0;var M=P.lR.exec(L);while(M){r+=L.substr(O,M.index-O);var N=z(P,M);if(N){x+=N[1];r+='<span class="'+N[0]+'">'+M[0]+"</span>"}else{r+=M[0]}O=P.lR.lastIndex;M=P.lR.exec(L)}return r+L.substr(O,L.length-O)}function J(L,M){if(M.sL&&e[M.sL]){var r=d(M.sL,L);x+=r.keyword_count;return r.value}else{return F(L,M)}}function I(M,r){var L=M.cN?'<span class="'+M.cN+'">':"";if(M.rB){y+=L;M.buffer=""}else{if(M.eB){y+=m(r)+L;M.buffer=""}else{y+=L;M.buffer=r}}D.push(M);A+=M.r}function G(N,M,Q){var R=D[D.length-1];if(Q){y+=J(R.buffer+N,R);return false}var P=q(M,R);if(P){y+=J(R.buffer+N,R);I(P,M);return P.rB}var L=v(D.length-1,M);if(L){var O=R.cN?"</span>":"";if(R.rE){y+=J(R.buffer+N,R)+O}else{if(R.eE){y+=J(R.buffer+N,R)+O+m(M)}else{y+=J(R.buffer+N+M,R)+O}}while(L>1){O=D[D.length-2].cN?"</span>":"";y+=O;L--;D.length--}var r=D[D.length-1];D.length--;D[D.length-1].buffer="";if(r.starts){I(r.starts,"")}return R.rE}if(w(M,R)){throw"Illegal"}}var E=e[B];var D=[E.dM];var A=0;var x=0;var y="";try{var s,u=0;E.dM.buffer="";do{s=p(C,u);var t=G(s[0],s[1],s[2]);u+=s[0].length;if(!t){u+=s[1].length}}while(!s[2]);if(D.length>1){throw"Illegal"}return{r:A,keyword_count:x,value:y}}catch(H){if(H=="Illegal"){return{r:0,keyword_count:0,value:m(C)}}else{throw H}}}function g(t){var p={keyword_count:0,r:0,value:m(t)};var r=p;for(var q in e){if(!e.hasOwnProperty(q)){continue}var s=d(q,t);s.language=q;if(s.keyword_count+s.r>r.keyword_count+r.r){r=s}if(s.keyword_count+s.r>p.keyword_count+p.r){r=p;p=s}}if(r.language){p.second_best=r}return p}function i(r,q,p){if(q){r=r.replace(/^((<[^>]+>|\t)+)/gm,function(t,w,v,u){return w.replace(/\t/g,q)})}if(p){r=r.replace(/\n/g,"<br>")}return r}function n(t,w,r){var x=h(t,r);var v=a(t);var y,s;if(v){y=d(v,x)}else{return}var q=c(t);if(q.length){s=document.createElement("pre");s.innerHTML=y.value;y.value=k(q,c(s),x)}y.value=i(y.value,w,r);var u=t.className;if(!u.match("(\\s|^)(language-)?"+v+"(\\s|$)")){u=u?(u+" "+v):v}if(/MSIE [678]/.test(navigator.userAgent)&&t.tagName=="CODE"&&t.parentNode.tagName=="PRE"){s=t.parentNode;var p=document.createElement("div");p.innerHTML="<pre><code>"+y.value+"</code></pre>";t=p.firstChild.firstChild;p.firstChild.cN=s.cN;s.parentNode.replaceChild(p.firstChild,s)}else{t.innerHTML=y.value}t.className=u;t.result={language:v,kw:y.keyword_count,re:y.r};if(y.second_best){t.second_best={language:y.second_best.language,kw:y.second_best.keyword_count,re:y.second_best.r}}}function o(){if(o.called){return}o.called=true;var r=document.getElementsByTagName("pre");for(var p=0;p<r.length;p++){var q=b(r[p]);if(q){n(q,hljs.tabReplace)}}}function l(){if(window.addEventListener){window.addEventListener("DOMContentLoaded",o,false);window.addEventListener("load",o,false)}else{if(window.attachEvent){window.attachEvent("onload",o)}else{window.onload=o}}}var e={};this.LANGUAGES=e;this.highlight=d;this.highlightAuto=g;this.fixMarkup=i;this.highlightBlock=n;this.initHighlighting=o;this.initHighlightingOnLoad=l;this.IR="[a-zA-Z][a-zA-Z0-9_]*";this.UIR="[a-zA-Z_][a-zA-Z0-9_]*";this.NR="\\b\\d+(\\.\\d+)?";this.CNR="\\b(0[xX][a-fA-F0-9]+|(\\d+(\\.\\d*)?|\\.\\d+)([eE][-+]?\\d+)?)";this.BNR="\\b(0b[01]+)";this.RSR="!|!=|!==|%|%=|&|&&|&=|\\*|\\*=|\\+|\\+=|,|\\.|-|-=|/|/=|:|;|<|<<|<<=|<=|=|==|===|>|>=|>>|>>=|>>>|>>>=|\\?|\\[|\\{|\\(|\\^|\\^=|\\||\\|=|\\|\\||~";this.ER="(?![\\s\\S])";this.BE={b:"\\\\.",r:0};this.ASM={cN:"string",b:"'",e:"'",i:"\\n",c:[this.BE],r:0};this.QSM={cN:"string",b:'"',e:'"',i:"\\n",c:[this.BE],r:0};this.CLCM={cN:"comment",b:"//",e:"$"};this.CBLCLM={cN:"comment",b:"/\\*",e:"\\*/"};this.HCM={cN:"comment",b:"#",e:"$"};this.NM={cN:"number",b:this.NR,r:0};this.CNM={cN:"number",b:this.CNR,r:0};this.BNM={cN:"number",b:this.BNR,r:0};this.inherit=function(r,s){var p={};for(var q in r){p[q]=r[q]}if(s){for(var q in s){p[q]=s[q]}}return p}}();hljs.LANGUAGES.cpp=function(){var a={keyword:{"false":1,"int":1,"float":1,"while":1,"private":1,"char":1,"catch":1,"export":1,virtual:1,operator:2,sizeof:2,dynamic_cast:2,typedef:2,const_cast:2,"const":1,struct:1,"for":1,static_cast:2,union:1,namespace:1,unsigned:1,"long":1,"throw":1,"volatile":2,"static":1,"protected":1,bool:1,template:1,mutable:1,"if":1,"public":1,friend:2,"do":1,"return":1,"goto":1,auto:1,"void":2,"enum":1,"else":1,"break":1,"new":1,extern:1,using:1,"true":1,"class":1,asm:1,"case":1,typeid:1,"short":1,reinterpret_cast:2,"default":1,"double":1,register:1,explicit:1,signed:1,typename:1,"try":1,"this":1,"switch":1,"continue":1,wchar_t:1,inline:1,"delete":1,alignof:1,char16_t:1,char32_t:1,constexpr:1,decltype:1,noexcept:1,nullptr:1,static_assert:1,thread_local:1,restrict:1,_Bool:1,complex:1},built_in:{std:1,string:1,cin:1,cout:1,cerr:1,clog:1,stringstream:1,istringstream:1,ostringstream:1,auto_ptr:1,deque:1,list:1,queue:1,stack:1,vector:1,map:1,set:1,bitset:1,multiset:1,multimap:1,unordered_set:1,unordered_map:1,unordered_multiset:1,unordered_multimap:1,array:1,shared_ptr:1}};return{dM:{k:a,i:"</",c:[hljs.CLCM,hljs.CBLCLM,hljs.QSM,{cN:"string",b:"'\\\\?.",e:"'",i:"."},{cN:"number",b:"\\b(\\d+(\\.\\d*)?|\\.\\d+)(u|U|l|L|ul|UL|f|F)"},hljs.CNM,{cN:"preprocessor",b:"#",e:"$"},{cN:"stl_container",b:"\\b(deque|list|queue|stack|vector|map|set|bitset|multiset|multimap|unordered_map|unordered_set|unordered_multiset|unordered_multimap|array)\\s*<",e:">",k:a,r:10,c:["self"]}]}}}();hljs.LANGUAGES.r={dM:{c:[hljs.HCM,{cN:"number",b:"\\b0[xX][0-9a-fA-F]+[Li]?\\b",e:hljs.IMMEDIATE_RE,r:0},{cN:"number",b:"\\b\\d+(?:[eE][+\\-]?\\d*)?L\\b",e:hljs.IMMEDIATE_RE,r:0},{cN:"number",b:"\\b\\d+\\.(?!\\d)(?:i\\b)?",e:hljs.IMMEDIATE_RE,r:1},{cN:"number",b:"\\b\\d+(?:\\.\\d*)?(?:[eE][+\\-]?\\d*)?i?\\b",e:hljs.IMMEDIATE_RE,r:0},{cN:"number",b:"\\.\\d+(?:[eE][+\\-]?\\d*)?i?\\b",e:hljs.IMMEDIATE_RE,r:1},{cN:"keyword",b:"(?:tryCatch|library|setGeneric|setGroupGeneric)\\b",e:hljs.IMMEDIATE_RE,r:10},{cN:"keyword",b:"\\.\\.\\.",e:hljs.IMMEDIATE_RE,r:10},{cN:"keyword",b:"\\.\\.\\d+(?![\\w.])",e:hljs.IMMEDIATE_RE,r:10},{cN:"keyword",b:"\\b(?:function)",e:hljs.IMMEDIATE_RE,r:2},{cN:"keyword",b:"(?:if|in|break|next|repeat|else|for|return|switch|while|try|stop|warning|require|attach|detach|source|setMethod|setClass)\\b",e:hljs.IMMEDIATE_RE,r:1},{cN:"literal",b:"(?:NA|NA_integer_|NA_real_|NA_character_|NA_complex_)\\b",e:hljs.IMMEDIATE_RE,r:10},{cN:"literal",b:"(?:NULL|TRUE|FALSE|T|F|Inf|NaN)\\b",e:hljs.IMMEDIATE_RE,r:1},{cN:"identifier",b:"[a-zA-Z.][a-zA-Z0-9._]*\\b",e:hljs.IMMEDIATE_RE,r:0},{cN:"operator",b:"<\\-(?!\\s*\\d)",e:hljs.IMMEDIATE_RE,r:2},{cN:"operator",b:"\\->|<\\-",e:hljs.IMMEDIATE_RE,r:1},{cN:"operator",b:"%%|~",e:hljs.IMMEDIATE_RE},{cN:"operator",b:">=|<=|==|!=|\\|\\||&&|=|\\+|\\-|\\*|/|\\^|>|<|!|&|\\||\\$|:",e:hljs.IMMEDIATE_RE,r:0},{cN:"operator",b:"%",e:"%",i:"\\n",r:1},{cN:"identifier",b:"`",e:"`",r:0},{cN:"string",b:'"',e:'"',c:[hljs.BE],r:0},{cN:"string",b:"'",e:"'",c:[hljs.BE],r:0},{cN:"paren",b:"[[({\\])}]",e:hljs.IMMEDIATE_RE,r:0}]}};
+hljs.initHighlightingOnLoad();
+</script>
+
+<!-- MathJax scripts -->
+<script type="text/javascript" src="https://cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+
+<style type="text/css">
+body, td {
+   font-family: sans-serif;
+   background-color: white;
+   font-size: 13px;
+}
+
+body {
+  max-width: 800px;
+  margin: auto;
+  padding: 1em;
+  line-height: 20px;
+}
+
+tt, code, pre {
+   font-family: 'DejaVu Sans Mono', 'Droid Sans Mono', 'Lucida Console', Consolas, Monaco, monospace;
+}
+
+h1 {
+   font-size:2.2em;
+}
+
+h2 {
+   font-size:1.8em;
+}
+
+h3 {
+   font-size:1.4em;
+}
+
+h4 {
+   font-size:1.0em;
+}
+
+h5 {
+   font-size:0.9em;
+}
+
+h6 {
+   font-size:0.8em;
+}
+
+a:visited {
+   color: rgb(50%, 0%, 50%);
+}
+
+pre, img {
+  max-width: 100%;
+}
+pre {
+  overflow-x: auto;
+}
+pre code {
+   display: block; padding: 0.5em;
+}
+
+code {
+  font-size: 92%;
+  border: 1px solid #ccc;
+}
+
+code[class] {
+  background-color: #F8F8F8;
+}
+
+table, td, th {
+  border: none;
+}
+
+blockquote {
+   color:#666666;
+   margin:0;
+   padding-left: 1em;
+   border-left: 0.5em #EEE solid;
+}
+
+hr {
+   height: 0px;
+   border-bottom: none;
+   border-top-width: thin;
+   border-top-style: dotted;
+   border-top-color: #999999;
+}
+
+@media print {
+   * {
+      background: transparent !important;
+      color: black !important;
+      filter:none !important;
+      -ms-filter: none !important;
+   }
+
+   body {
+      font-size:12pt;
+      max-width:100%;
+   }
+
+   a, a:visited {
+      text-decoration: underline;
+   }
+
+   hr {
+      visibility: hidden;
+      page-break-before: always;
+   }
+
+   pre, blockquote {
+      padding-right: 1em;
+      page-break-inside: avoid;
+   }
+
+   tr, img {
+      page-break-inside: avoid;
+   }
+
+   img {
+      max-width: 100% !important;
+   }
+
+   @page :left {
+      margin: 15mm 20mm 15mm 10mm;
+   }
+
+   @page :right {
+      margin: 15mm 10mm 15mm 20mm;
+   }
+
+   p, h2, h3 {
+      orphans: 3; widows: 3;
+   }
+
+   h2, h3 {
+      page-break-after: avoid;
+   }
+}
+</style>
+
+
+
+</head>
+
+<body>
+<h1>Regional Population Projections for Israel - Functions</h1>
+
+<h3>Copyright</h3>
+
+<p>Copyright 2017 National Economic Council, Prime Minister Office of Israel</p>
+
+<p>This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.</p>
+
+<p>This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.</p>
+
+<p>You should have received a copy of the GNU General Public License
+along with this program.  If not, see <a href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>.</p>
+
+<h3>Dependencies</h3>
+
+<p>This program was coded in R 3.4, using RStudio 1.0.143.
+Additional packages: tidyverse, readxl </p>
+
+<h2>Leslie Matrix Multiplication Function</h2>
+
+<h4>input:</h4>
+
+<ul>
+<li><code>k0</code> - population vector (by age). 17 female age groups, 17 male.</li>
+<li><code>fert</code> - fertility data, 7 values.</li>
+<li><code>mort</code> - mortality data, 36 values: 18 survival rates (\(s_x\)) for females and males (0-1,1-4,5-9,&hellip;,80+).</li>
+</ul>
+
+<h4>output:</h4>
+
+<p><code>k1</code> - vector of population by age in next period. 
+calculated by multiplying \(A \cdot k_0\), where \(A\) is a structural matrix 
+with a subdiagonal for aging and deaths, and 2 rows that represent births. </p>
+
+<pre><code class="r">fn_leslie_mult &lt;- function(k0 ,fert, mort) {
+  mort &lt;- arrange(mort, rev(sex),age) #make sure vector is arranged in order (females first)
+  fert &lt;- arrange(fert, age)
+  sx_f &lt;- mort$rate[mort$sex==&quot;female&quot; &amp; mort$age!=0] #survival rates, not including baby mortality.
+  sx_m &lt;- mort$rate[mort$sex==&quot;male&quot; &amp; mort$age!=0]
+  s0_f &lt;- mort$rate[mort$age==0 &amp; mort$sex==&quot;female&quot;]
+  s0_m &lt;- mort$rate[mort$age==0 &amp; mort$sex==&quot;male&quot;]
+  sx_fert &lt;- mort$rate[mort$age %in% fertile_ages_ext &amp; mort$sex==&quot;female&quot;] #survival rates for birthgivers
+
+  #creation of matrix (n_ages^2, all zeroes)
+  A &lt;- matrix(0,nrow=n_ages*2,n_ages*2)
+  colnames(A)&lt;-rep(ages,2)
+  rownames(A)&lt;-rep(ages,2)
+
+  #subdiagonal - aging and survival rates
+  #mort includes age 0-1 that is used for baby mortality. Leslie subdiagonal starts from second object
+  A[2:n_ages,1:n_ages-1] &lt;- diag(sx_f[1:(n_ages-1)]) #females
+  A[n_ages,n_ages] &lt;- sx_f[n_ages] #for ages 80+ (last value)
+  #males
+  A[(n_ages+2):(n_ages*2),(n_ages+1):(n_ages*2-1)] &lt;- diag(sx_m[1:(n_ages-1)]) #females
+  A[(n_ages*2),(n_ages*2)] &lt;- sx_m[n_ages] #for ages 80+ (last value)
+
+  #fertility rates for ages 10-14 to 45-49
+  nfx &lt;- c(0,fert$value)
+  nfxn &lt;- c(fert$value,0)
+
+  # first row formula:
+  # (baby mortality)*(asfr per 1 woman, female deaths)*(females at birth)
+  # for every age group, half the women are mostly in that age group for the cohort, and half
+  # move into the next age group. the formula distributes asfr between two age groups.
+  # note: mort[1] = (L1+L0/(5*l0)). multiplication by 5 used for 5 year cohort.
+  a1f &lt;- (s0_f*5)*((nfx/1000+nfxn/1000*sx_fert)/2)*(ffab)  
+  a1m &lt;- (s0_m*5)*((nfx/1000+nfxn/1000*sx_fert)/2)*(1-ffab)
+  A[1,fertile_ages_ext] &lt;- a1f #first row in Leslie for female newborns
+  A[n_ages+1,fertile_ages_ext] &lt;- a1m #first row in Leslie for male newborns
+
+  #calc k1
+  k1 &lt;- as.vector(A %*% k0)
+
+  return(k1)
+}
+</code></pre>
+
+<h2>Projection function for natural movements (aging, births and deaths)</h2>
+
+<p>This function calculates a new cohort in the model w.r.t aging, deaths and births
+Uses <code>fn_leslie_mult</code> for each group in the population.</p>
+
+<h4>Input:</h4>
+
+<ul>
+<li><code>cohort0</code> - base pop for all projections. data.frame of proj,group,geo,sex,age,pop (9792 obs)</li>
+<li><code>t0</code>,<code>t1</code> - base year, next period year. \(t_1=t_0+5\)</li>
+<li><code>fertility</code> - subset of fertility assumptions (asfr) for specific year (\(t_1\))</li>
+<li><code>mortality</code> - subset of survival assumptions (\(s_x\)) for specific year (\(t_1\))</li>
+</ul>
+
+<h4>Output:</h4>
+
+<p><code>cohort1</code> - population in \(t_1\). data.frame structure same as cohort0, 
+with additional columns for mortality, fertility, and migration.</p>
+
+<pre><code class="r">fn_proj_natural &lt;- function(cohort0, t0, t1, fertility, mortality) { 
+  # Copy data 
+  cohort1 &lt;- cohort0
+
+  # Subset mortality and fertility data to specific year
+  fert_cohort &lt;- filter(fertility, year==t1)
+  mort_cohort &lt;- filter(mortality, year==t1)
+
+  # arranging and grouping for next steps
+  cohort1 &lt;- cohort1 %&gt;% 
+    group_by(proj, group,geo) %&gt;% arrange(proj, group,geo,desc(sex),age) #female before male
+  mort_cohort &lt;- mort_cohort %&gt;% group_by(proj, group, geo) %&gt;% arrange(proj, group,geo,desc(sex),age)
+  fert_cohort &lt;- fert_cohort %&gt;% group_by(proj, group, geo) %&gt;% arrange(proj, group,geo,age)
+
+  # Calculate natural movements, using Leslie matrix multiplication function for every group
+  cohort1 &lt;- cohort1 %&gt;% mutate(
+    pop2=fn_leslie_mult(pop, 
+                        fert_cohort[fert_cohort$group==unique(group) &amp; 
+                                      fert_cohort$geo==unique(geo) &amp; 
+                                      fert_cohort$proj==unique(proj),], 
+                        mort_cohort[mort_cohort$group==unique(group) &amp; 
+                                      mort_cohort$geo==unique(geo) &amp; 
+                                      mort_cohort$proj==unique(proj),]))
+
+  # Keep old values, needed for adjustments to housing.
+  cohort1 &lt;- cohort1 %&gt;% group_by(proj, group, geo, sex) %&gt;% mutate(oldpop=lag(pop,default = 0))
+
+  # Calculate deaths
+  cohort1$deaths &lt;- 0
+  cohort1$deaths[cohort1$age!=0 &amp; cohort1$age!=last_age] &lt;- 
+    cohort1$pop2[cohort1$age!=0 &amp; cohort1$age!=last_age] - 
+    cohort1$oldpop[cohort1$age!=0 &amp; cohort1$age!=last_age]
+  cohort1$deaths[cohort1$age==last_age] &lt;- 
+    cohort1$pop2[cohort1$age==last_age] - 
+    (cohort1$pop[cohort1$age==last_age]+cohort1$oldpop[cohort1$age==last_age])
+  cohort1 &lt;- cohort1 %&gt;% group_by(proj, group,geo)
+
+  # Cleanup
+  cohort1$pop &lt;- cohort1$pop2
+  cohort1 &lt;- select(cohort1, -pop2)
+  return(cohort1)
+}
+</code></pre>
+
+<h2>Projection function for internal migration</h2>
+
+<p>This function recieves the <code>cohort1</code> data frame (population after aging, deaths and births),
+and calculates the internal migration movements.
+NOTE: Internal migration changes total population because of differences 
+in fertility of muslims between different areas.</p>
+
+<h4>Input:</h4>
+
+<ul>
+<li><code>cohort1</code> - Population data before internal migration.</li>
+<li><code>intmig</code> - Internal migration assumptions.</li>
+</ul>
+
+<h4>Output:</h4>
+
+<ul>
+<li><code>cohort1</code> - Population data after internal migration.</li>
+</ul>
+
+<pre><code class="r">fn_proj_intmig &lt;- function(cohort1, intmig) {
+  cohort1_after_intmig &lt;- data.frame()
+  for (i in proj){
+    cohort1 &lt;- ungroup(cohort1) #clean grouping
+    cohort1t &lt;- cohort1 %&gt;% filter(proj==i) %&gt;% select(group, geo, sex, age, pop)
+    int_mig_tmp &lt;- merge(intmig, cohort1t, 
+                         by.x=c(&quot;group&quot;,&quot;sex&quot;,&quot;age&quot;,&quot;exit&quot;), 
+                         by.y=c(&quot;group&quot;,&quot;sex&quot;,&quot;age&quot;,&quot;geo&quot;), 
+                         all.x = TRUE)
+    #calc pop*rate, rates are per year. we need 5 year rates.
+    int_mig_tmp$mig_abs &lt;- int_mig_tmp$pop*(int_mig_tmp$rate*5) 
+
+    #create groups
+    exits &lt;- int_mig_tmp %&gt;% group_by(group,sex,age, exit) %&gt;% summarise(pop_exit=sum(mig_abs))
+    enters &lt;- int_mig_tmp %&gt;% group_by(group,sex,age, enter) %&gt;% summarise(pop_enter=sum(mig_abs))
+
+    #merge data together
+    colnames(exits)[4] &lt;- &quot;geo&quot;
+    colnames(enters)[4] &lt;- &quot;geo&quot;
+    cohort1t&lt;-merge(cohort1t, exits, by=(c(&quot;group&quot;,&quot;sex&quot;,&quot;age&quot;,&quot;geo&quot;)),all.x=TRUE)
+    cohort1t&lt;-merge(cohort1t, enters, by=(c(&quot;group&quot;,&quot;sex&quot;,&quot;age&quot;,&quot;geo&quot;)), all.x=TRUE)
+    rm(exits,enters)
+
+    #calc pop after migration
+    cohort1t$pop_exit[is.na(cohort1t$pop_exit)] &lt;- 0
+    cohort1t$pop_enter[is.na(cohort1t$pop_enter)] &lt;- 0
+    cohort1t$pop &lt;- cohort1t$pop + cohort1t$pop_enter - cohort1t$pop_exit
+    cohort1t &lt;- cohort1t %&gt;% group_by(group,geo) %&gt;% arrange(group,geo,desc(sex),age)
+
+    # prepare data for return (put into cohort1_after_intmig)
+    cohort1t &lt;- ungroup(cohort1t)
+    cohort1t$proj &lt;- factor(i, levels=proj)
+    cohort1t_to_merge &lt;- cohort1 %&gt;% filter(proj==i) %&gt;% select(-pop, -intmig_enter, -intmig_exit)
+    cohort1t_to_merge$proj &lt;- factor(cohort1t_to_merge$proj, levels=proj)
+    cohort1t &lt;- left_join(cohort1t, cohort1t_to_merge, by=c(&quot;proj&quot;, &quot;group&quot;, &quot;geo&quot;, &quot;sex&quot;, &quot;age&quot;))
+    cohort1t &lt;- cohort1t %&gt;% select(proj, group, geo, sex, age, pop, deaths, year,
+                                    intmig_exit=pop_exit,
+                                    intmig_enter=pop_enter,
+                                    yerida, aliya, oldpop)
+    cohort1t$intmig_exit &lt;- 0 - cohort1t$intmig_exit
+    cohort1_after_intmig &lt;- rbind(cohort1_after_intmig, cohort1t)
+  }
+
+  return(cohort1_after_intmig)
+}
+</code></pre>
+
+<h2>Projection function for external migration</h2>
+
+<p>This function adds external (international) migration, divided into immigration and emigration.
+Based on the CBS assumptions, the total amount of migration is constant. the distribution between
+geographic regions and population groups is based on the distribution of external migration through
+the years 2005-2014.</p>
+
+<h4>Input:</h4>
+
+<ul>
+<li><code>cohort1</code> - Population data before internal migration.</li>
+<li><code>aliya</code> - External immigration assumptions.</li>
+<li><code>yerida</code> - External emmigration assumptions.</li>
+</ul>
+
+<h4>Output:</h4>
+
+<ul>
+<li><code>cohort1</code> - Population data after internal migration.</li>
+</ul>
+
+<pre><code class="r">fn_proj_extmig &lt;- function(cohort1, aliya, yerida){
+  #Yerida
+  cohort1 &lt;- left_join(cohort1,yerida, by=c(&quot;group&quot;, &quot;geo&quot;, &quot;sex&quot;, &quot;age&quot;), all=TRUE)
+  cohort1$yerida_pop[is.na(cohort1$yerida_pop)]&lt;-0
+  cohort1$pop2 &lt;- cohort1$pop + (cohort1$yerida_pop * 5) #emmig is negative, annual
+  cohort1$yerida &lt;- cohort1$pop2 - cohort1$pop
+  cohort1$pop &lt;- cohort1$pop2
+  cohort1 &lt;- select(cohort1, -pop2, -yerida_pop)
+
+  #Aliya
+  cohort1 &lt;- merge(cohort1,aliya, by=c(&quot;group&quot;, &quot;geo&quot;, &quot;sex&quot;, &quot;age&quot;), all = TRUE)
+  cohort1$aliya_pop[is.na(cohort1$aliya_pop)]&lt;-0
+  cohort1$pop &lt;- cohort1$pop + (cohort1$aliya_pop * 5) #annual, multiply by 5 for 5-year.
+  cohort1$aliya &lt;- cohort1$aliya_pop*5
+  cohort1 &lt;- select(cohort1, -aliya_pop)
+
+  #Remove migrations of arab population to the West Bank
+  cohort1$pop[cohort1$group %in% groups[4:6] &amp; cohort1$geo==nafas[16]] &lt;- 0
+
+  return(cohort1)
+}
+</code></pre>
+
+<h2>Main projection function</h2>
+
+<p>This function calls the functions <code>fn_proj_natural</code>, <code>fn_proj_intmig</code> and <code>fn_proj_extmig</code>
+to calculate the population change from time \(t\) to time \(t+5\).</p>
+
+<ul>
+<li>If <code>fit_to_CBS_model==TRUE</code>, then after each period the model is fitted
+to the national population, given from the CBS 2065 population projections.</li>
+<li>If <code>housing_adj_setting==TRUE</code>, then housing needs are compared to housing supply, and then 
+another stage of internal migration is run, in order to disrtibute the population based on the
+housing plans.</li>
+<li>If <code>print_progress==TRUE</code>, then progress is printed during run.</li>
+</ul>
+
+<h4>Input:</h4>
+
+<ul>
+<li><code>base</code> - Base population (Population in year 2015)</li>
+<li><code>proj_length</code> - Number of periods to run the model.</li>
+<li><code>fertility</code>- Fertility assumptions.</li>
+<li><code>mortality</code> - Mortality assumptions.</li>
+<li><code>intmig</code> - Internal migration assumptions.</li>
+<li><code>aliya</code> - External immigration assumptions.</li>
+<li><code>yerida</code> - External emmigration assumptions.</li>
+<li><code>CBS2065</code> - Population in CBS 2065 projections.</li>
+<li><code>housing_plans</code> - Housing supply plans.</li>
+</ul>
+
+<h4>Output:</h4>
+
+<ul>
+<li><code>final_results</code> - Population projection for projection horizon</li>
+<li><code>housing</code> - Housing needs (used for analysis)</li>
+<li><code>housing_adj</code> - Housing needs after adjustment (used for analysis)</li>
+</ul>
+
+<pre><code class="r">fn_proj &lt;- function(base,proj_length,fertility,mortality,intmig,aliya,yerida, CBS2065, housing_plans){
+  final_results &lt;- data.frame(base)
+  housing &lt;- data.frame()
+  housing_adj &lt;- data.frame() #adjusted housing needs
+
+  #run projection
+  for (t in years[2:proj_length]) {
+    results &lt;- fn_proj_natural(base,t-5,t,fertility, mortality)  # calc natural movements
+    results &lt;- fn_proj_intmig(results, intmig)  # calc internal migration
+    aliya_cohort &lt;- aliya %&gt;% filter(year==t) %&gt;% select(-year)
+    yerida_cohort &lt;- yerida %&gt;% filter(year==t) %&gt;% select(-year)
+    if (ext_mig_setting == TRUE) {
+      results &lt;- fn_proj_extmig(results, aliya_cohort,yerida_cohort)  # calc external migration    
+    }
+    results$year &lt;- factor(t, levels=years)
+
+    #fit to CBS2065
+    if (fit_to_CBS_model==TRUE) results &lt;- fit_model(results, CBS2065)
+
+    #calc new housing needs
+    housing_results &lt;- fn_housing_needs(results)
+    housing_results$year &lt;- factor(t, levels=years)
+    housing &lt;- group_by(housing) #fix grouping
+    housing_results &lt;- group_by(housing_results)
+
+    housing &lt;- rbind(housing,housing_results)
+
+
+    #Housing adjustment
+    if (housing_adj_setting==TRUE &amp; t&lt;=housing_plans_until) {
+      #adjust population to house building plans  
+      results &lt;- fn_adjust_to_plans(results, housing_results,
+                                    housing_plans[housing_plans$year==t,],t,intmig)
+
+      #calc new housing needs, after adjustments
+      housing_results_adj &lt;- fn_housing_needs(results)
+      housing_results_adj$year &lt;- factor(t, levels=years)
+      housing_adj &lt;- group_by(housing_adj)
+      housing_results_adj &lt;- group_by(housing_results_adj)
+      housing_adj &lt;- rbind(housing_adj,housing_results_adj)
+    }
+
+    #prepare for next round
+    final_results &lt;- group_by(final_results) #fix grouping
+    results &lt;- group_by(results)
+    final_results &lt;- rbind(final_results, results)
+    base &lt;- results
+
+    #print progress
+    if (print_progress==TRUE){
+      print(paste(&quot;Year &quot;, t, &quot; , Housing adjusted: &quot;, housing_adj_setting))
+      print(results %&gt;% group_by(proj) %&gt;% summarise(pop=sum(pop)))
+    }
+
+  }
+
+  final_results &lt;- final_results %&gt;% arrange(proj, group,year, geo, sex, age)
+  return(list(final_results,housing,housing_adj))
+}
+</code></pre>
+
+<h2>Housing demand calculation</h2>
+
+<p>This function calculates the empty houses created by immigration and deaths,
+and the housing needs of new households.</p>
+
+<h4>Input:</h4>
+
+<p><code>cohort</code> - population data</p>
+
+<h4>Output:</h4>
+
+<p><code>housing</code> - housing demand</p>
+
+<pre><code class="r">fn_housing_needs &lt;- function(cohort) {
+
+  cohort &lt;- cohort %&gt;% group_by(proj, group, geo,sex,age) %&gt;% arrange(proj, group, geo,sex,age)
+  cohort$housing_needs &lt;- 0
+  cohort &lt;- left_join(cohort, notmarried, by=c(&quot;age&quot;, &quot;group&quot;, &quot;sex&quot;))
+
+  #Jew:
+  cohort &lt;- cohort %&gt;% mutate(housing_needs=
+                                replace(housing_needs,
+                                        group %in% groups[1:3] &amp; age==20,
+                                        pop*NewHousing_jews20_29))
+  cohort &lt;- cohort %&gt;% mutate(housing_needs=
+                                replace(housing_needs,
+                                        group %in% groups[1:3] &amp; age==25,
+                                        (aliya+yerida+intmig_enter+intmig_exit+deaths)*NewHousing_jews20_29))
+  cohort &lt;- cohort %&gt;% mutate(housing_needs=
+                                replace(housing_needs,
+                                        group %in% groups[1:3] &amp; age==30,
+                                        (0-pop*NewHousing_jews20_29)+pop*NewHousing_jews30p))
+  cohort &lt;- cohort %&gt;% mutate(housing_needs=
+                                replace(housing_needs,
+                                        group %in% groups[1:3] &amp; age %in% 35:80,
+                                        deaths*single+
+                                          (intmig_enter+intmig_exit+yerida+aliya)*
+                                          NewHousing_jews30p))
+
+  #arab
+  cohort &lt;- cohort %&gt;% mutate(housing_needs=
+                                replace(housing_needs,
+                                        group %in% groups[4:6] &amp; age==20,
+                                        pop*NewHousing_arabs20_29))
+  cohort &lt;- cohort %&gt;% mutate(housing_needs=
+                                replace(housing_needs,
+                                        group %in% groups[4:6] &amp; age==25,
+                                        (aliya+yerida+intmig_enter+intmig_exit+deaths)*
+                                          NewHousing_arabs20_29))
+  cohort &lt;- cohort %&gt;% mutate(housing_needs=
+                                replace(housing_needs,
+                                        group %in% groups[4:6] &amp; age==30,
+                                        (0-pop*NewHousing_arabs20_29)+pop*NewHousing_arabs30p))
+  cohort &lt;- cohort %&gt;% mutate(housing_needs=
+                                replace(housing_needs,
+                                        group %in% groups[4:6] &amp; age %in% 35:80,
+                                        deaths*single+
+                                          (intmig_enter+intmig_exit+yerida+aliya)*
+                                          NewHousing_arabs30p))
+
+  housing &lt;- cohort %&gt;% group_by(group, geo, proj) %&gt;% 
+    select(group, geo, proj, year, housing_needs) %&gt;%
+    summarise(housing_needs=sum(housing_needs))
+
+  housing$housing_needs &lt;- housing$housing_needs/5  # change to annual values
+  return(housing)
+
+
+}
+</code></pre>
+
+<h2>Adjust internal migration to housing plans</h2>
+
+<p>this is the main function for adjusting migration to plans.
+It recieves the population and district plans, adjusts the migration to the housing plans
+and output the adjusted population.  Demand is the housing needs for every population. 
+It is calculated based on changes in pop in every nafa.
+supply is the housing plans of the government. I assume all plans will be realized.</p>
+
+<h4>Input:</h4>
+
+<ul>
+<li><code>cohort</code> - projection period pop data</li>
+<li><code>demand</code> - housing needs</li>
+<li><code>supply</code> - housing plans by district</li>
+<li><code>t</code> - time</li>
+<li><code>intmig</code> - internal migration data</li>
+</ul>
+
+<h4>Output:</h4>
+
+<ul>
+<li><code>cohort</code> - cohort population adjusted to plans</li>
+</ul>
+
+<pre><code class="r">fn_adjust_to_plans &lt;- function(cohort,demand, supply, t, intmig) {
+
+  #data is in terms of annual housing units. Transform to 5-year periods:
+  demand$housing_needs &lt;- demand$housing_needs*5
+  supply$plans &lt;- supply$plans*5
+
+  #demand has 288 rows (group*geo*proj). Sum by groups and merge with the supply values
+  demand &lt;- demand %&gt;% group_by(geo, proj) %&gt;% summarise(demand=sum(housing_needs)) 
+  adjust &lt;- merge(demand, supply, by=&quot;geo&quot;) %&gt;% select(-year) #merge demand and supply
+
+  # Now there is demand and supply for every nafa and proj.
+  # The difference between them is the problem
+  # If it is positive, then people don&#39;t have houses, and need to move.
+  # If it is negative, there are empty houses. 
+  adjust$diff &lt;- adjust$demand - adjust$plans #Diff&gt;0 is excess demand.
+  adjust &lt;- select(adjust, -demand, -plans)
+
+  #PART 1
+  #Calc how many people need to be removed from excess regions, and where they want to go.
+  #####################################################################################
+  #these are the places with excess demand. Need to remove people from there:
+  excess &lt;- adjust %&gt;% filter(diff&gt;0) #diff&gt;0 there is more demand than supply
+
+  # Produce the migration from these places. where people in this place are moving to.
+  # excess_mig holds data on values of internal migration (other part in the model).
+  # Use this data to calc the rates by which people will move, to solve the excess demand.
+  # Merge excess with excess_mig to get the values of migration from the places of excess demand.
+  excess_mig &lt;- cohort %&gt;% select(group, geo, sex, age, proj, pop, intmig_exit)
+  excess_mig &lt;- as.tbl(excess_mig)
+  excess_mig &lt;- left_join(excess, excess_mig, by=c(&quot;geo&quot;, &quot;proj&quot;)) 
+  #keep only the places that are in excess demand
+
+  # Calc the amount of houses to move out, and the age structure of the out migration.
+  # Still don&#39;t know where they would have liked to move. 
+
+  # Every migration to be broken down into destinations.
+  # Using the intmig df, calc &quot;p.rate&quot; - the % of migration by destination for every source of migration
+  intmig_dest &lt;- intmig %&gt;% group_by(exit,group,sex,age) %&gt;% 
+    mutate(prate=rate/sum(rate)) %&gt;% select(-rate)
+  intmig_dest$prate[is.na(intmig_dest$prate)] &lt;-0  # where data is divided by 0.
+
+  # Now merging them together:
+  excess_mig &lt;- left_join(excess_mig, intmig_dest, by=c(&quot;geo&quot;=&quot;exit&quot;, &quot;group&quot;, &quot;sex&quot;, &quot;age&quot;))
+
+  # Calculate migration flow by destination:
+  excess_mig$x_mig &lt;- excess_mig$intmig_exit * excess_mig$prate
+  excess_mig &lt;- excess_mig %&gt;% select(-prate, -intmig_exit)
+
+  # Now it&#39;s known how many people moved from every place to every place (called that x_mig)
+  # Using this data to calc stream percentage (calling this y_mig)
+  # Grouping is by geo and proj - want the % of (age, sex, group) for every geo and proj
+  excess_mig &lt;- excess_mig %&gt;% group_by(geo, proj) %&gt;% mutate(y_mig=x_mig/sum(x_mig))
+  excess_mig$y_mig[is.na(excess_mig$y_mig)] &lt;-0
+
+  # Add the housing coefs
+  excess_mig$housing_coef &lt;- 0
+  excess_mig$housing_coef[excess_mig$group %in% groups[1:3] &amp; 
+                            excess_mig$age %in% c(20,25)] &lt;- NewHousing_jews20_29
+  excess_mig$housing_coef[excess_mig$group %in% groups[1:3] &amp; 
+                            excess_mig$age %in% c(seq(30,80,5))] &lt;- NewHousing_jews30p
+  excess_mig$housing_coef[excess_mig$group %in% groups[1:3] &amp; 
+                            excess_mig$age==30] &lt;- NewHousing_jews30p-NewHousing_jews20_29
+  excess_mig$housing_coef[excess_mig$group %in% groups[4:6] &amp; 
+                            excess_mig$age %in% c(20,25)] &lt;- NewHousing_arabs20_29
+  excess_mig$housing_coef[excess_mig$group %in% groups[4:6] &amp; 
+                            excess_mig$age %in% c(seq(30,80,5))] &lt;- NewHousing_arabs30p
+  excess_mig$housing_coef[excess_mig$group %in% groups[4:6] &amp; 
+                            excess_mig$age==30] &lt;- NewHousing_jews30p-NewHousing_jews20_29
+
+  # Calculating total pop to transfer. 
+  # tot is calculated by dividing the housing needs by the sum of multiplictions of housing coeficients
+  # and the % of migration (by age, sex, group and destination). It gives a population size, that
+  # if will be broken down by age, and multiplied by the housing coefs, will fit the difference
+  # between demand and supply.
+  excess_mig$tot &lt;- 0
+  excess_mig &lt;- excess_mig %&gt;% group_by(geo, proj) %&gt;% mutate(tot=diff/c(housing_coef %*% y_mig))
+
+  # calculate specific migration
+  # This is the amount of people that should be removed, by age, sex and group.
+  # it is a result of dividing up tot by all the different y_mig values.
+  excess_mig$mig &lt;- -(excess_mig$tot * excess_mig$y_mig) #turn into negative
+  excess_mig &lt;- excess_mig %&gt;% select(group, geo, sex, age, proj, enter, mig) #cleaning up
+  excess_mig &lt;- ungroup(excess_mig) 
+  excess_mig &lt;- arrange(excess_mig)
+  #thats it! IT is known from where to take people and where they want to go.
+
+  # part 2 - remove people from nafas with excess demand
+  ######################################################
+  # have to summarize the destinations for each group:
+  excess_tot &lt;- excess_mig %&gt;% group_by(group, geo,sex, age, proj) %&gt;% summarize(totmig=sum(mig))
+  # merge with cohort, in order to remove people
+  cohort &lt;- merge(cohort, excess_tot,by=c(&quot;group&quot;,&quot;geo&quot;,&quot;sex&quot;,&quot;age&quot;,&quot;proj&quot;),all.x=TRUE)
+  # for all places that we don&#39;t need to remove anyone. there is enough housing
+  cohort$totmig[is.na(cohort$totmig)] &lt;- 0 
+
+  cohort$pop &lt;- cohort$pop + cohort$totmig #removal of the migration values from pop
+  cohort$intmig_exit &lt;- cohort$intmig_exit+cohort$totmig #adding them to the exit_migration flow
+  cohort &lt;- select(cohort,-totmig) #cleanup
+  adjust$diff[adjust$diff&gt;0] &lt;- 0 #removal the excess demand. 
+
+
+  # part 3 - put people where they want to go IF there is place
+  ##############################################################
+  # Group by destinations, to see the amount of people that want to move to each destination:
+  excess_dest &lt;- excess_mig %&gt;% group_by(group,enter,sex,age,proj) %&gt;% 
+    summarise(totmig=-sum(mig)) #turn into positive
+  excess_dest &lt;- dplyr::rename(excess_dest,geo=enter) #change column name
+
+  # calc how much housing will these people need in every nafa
+  excess_dest$housing_coef &lt;- 0
+  excess_dest$housing_coef[excess_dest$group %in% groups[1:3] &amp; 
+                             excess_dest$age %in% c(20,25)] &lt;- NewHousing_jews20_29
+  excess_dest$housing_coef[excess_dest$group %in% groups[1:3] &amp; 
+                             excess_dest$age %in% c(seq(30,80,5))] &lt;- NewHousing_jews30p
+  excess_dest$housing_coef[excess_dest$group %in% groups[1:3] &amp; 
+                             excess_dest$age==30] &lt;- NewHousing_jews30p-NewHousing_jews20_29
+  excess_dest$housing_coef[excess_dest$group %in% groups[4:6] &amp; 
+                             excess_dest$age %in% c(20,25)] &lt;- NewHousing_arabs20_29
+  excess_dest$housing_coef[excess_dest$group %in% groups[4:6] &amp; 
+                             excess_dest$age %in% c(seq(30,80,5))] &lt;- NewHousing_arabs30p
+  excess_dest$housing_coef[excess_dest$group %in% groups[4:6] &amp; 
+                             excess_dest$age==30] &lt;- NewHousing_jews30p-NewHousing_jews20_29
+  excess_dest$housing_needs &lt;- excess_dest$housing_coef * excess_dest$totmig
+  # calc total
+  excess_dest_tot &lt;- excess_dest %&gt;% group_by(proj, geo) %&gt;% 
+    summarise(housing_needs=sum(housing_needs))
+
+  #how much space is there?
+  adjust2 &lt;- merge(adjust,excess_dest_tot,by=c(&quot;geo&quot;,&quot;proj&quot;),all=TRUE)
+
+  # calc of step 1 of movements - people that want to move to a destination and there is housing available
+  # movement subject to minimum. 
+  # If there is enough housing, all demand will be supplied.
+  # If not, all the available supply will be filled.
+  adjust2$step1[-adjust2$diff&gt;adjust2$housing_needs] &lt;- 
+    adjust2$housing_needs[-adjust2$diff&gt;adjust2$housing_needs]
+  adjust2$step1[-adjust2$diff&lt;adjust2$housing_needs] &lt;- 
+    -adjust2$diff[-adjust2$diff&lt;adjust2$housing_needs]
+  adjust2$step1[adjust2$diff&gt;0] &lt;- 0 #if there is no place to begin with, don&#39;t move anyone.
+
+  # calc the % of people that want to move to some place, and there is actually place for them
+  # if step1p=1 there is place for all. if step1p=0, there is no place. 
+  #if 0&lt;step1p&lt;1, there is partial space
+  adjust2$step1p &lt;- adjust2$step1/adjust2$housing_needs  
+  adjust3 &lt;- select(adjust2,geo,proj,step1p) 
+
+  # merge the % of people that can move in this step with excess_dest
+  excess_dest &lt;- merge(excess_dest, adjust3, by=c(&quot;geo&quot;, &quot;proj&quot;), all=TRUE)
+  excess_dest &lt;- select(excess_dest, -housing_needs)
+  excess_dest$totmig_step1 &lt;- excess_dest$totmig*excess_dest$step1p #calc streams of people for step 1
+
+  # totmig_step1 is the amount of intmig_enter to add to cohort. lets move the people.
+  excess_temp &lt;- select(excess_dest,group,geo,sex,age,proj,totmig_step1)
+  cohort &lt;- merge(cohort, excess_temp, by=c(&quot;group&quot;,&quot;geo&quot;,&quot;sex&quot;,&quot;age&quot;,&quot;proj&quot;), all.x=TRUE)
+  cohort$pop &lt;- cohort$pop+cohort$totmig_step1 #adding people to projection
+  cohort$intmig_enter &lt;- cohort$intmig_enter+cohort$totmig_step1 #people were moved!
+  rm(excess_temp)
+  cohort &lt;- select(cohort,-totmig_step1) 
+
+  # update excess_dest: calc how much are left to move, after step 1 was executed
+  excess_dest$totmig &lt;- excess_dest$totmig - excess_dest$totmig_step1 #pop left to be moved. 
+  excess_dest &lt;- select(excess_dest, -totmig_step1, -step1p) #cleanup
+
+  # until this step, it was important where people want to go. 
+  # Now, it does not matter, because there is no place for them there.
+  # Collapse the destinations in order to prepare for next step of migration
+
+  excess_dest &lt;- excess_dest %&gt;% group_by(proj, group,sex,age,housing_coef) %&gt;% 
+    summarise(totmig=sum(totmig))
+  # Added housing_coef to group_by() to prevent it being deleted
+
+  # part 4 - move the rest of people to where there is place.
+  # this is the second step in moving the people
+  # people will not be moved to where they wanted to go - because there is no place.
+  # they will be moved based on the available housing.
+  ###########################################################
+
+  excess_dest$housing_needs &lt;- excess_dest$housing_coef * excess_dest$totmig 
+  #what are the new housing needs?
+  #sum the new housing needs
+  excess_dest_tot &lt;- excess_dest %&gt;% group_by(proj) %&gt;% summarise(housing_needs=sum(housing_needs))
+  #combine with the remaining housing supply
+  adjust4 &lt;-adjust2
+  adjust4$diff &lt;- adjust4$diff+adjust4$step1
+  adjust4 &lt;- select(adjust4,-step1,-step1p,-housing_needs)
+  adjust4 &lt;- merge(adjust4,excess_dest_tot,by=&quot;proj&quot;,all=TRUE)
+
+  #for this step, Need two rates:
+  # 1. What is the total available housing compared to the total needs.
+  adjust4 &lt;- adjust4 %&gt;% group_by(proj) %&gt;% mutate(tot_spc=-sum(diff)/housing_needs)
+  # 2. How does the available housing break up between the different areas. 
+  adjust4 &lt;- adjust4 %&gt;% group_by(proj) %&gt;% mutate(comp_spc=diff/sum(diff))
+
+  #multiplication of two rates will give the composition of destinations in step 2
+  adjust4$dest_rate &lt;- adjust4$tot_spc * adjust4$comp_spc
+
+  #cleanup
+  adjust4 &lt;- adjust4 %&gt;% filter(dest_rate&gt;0) %&gt;% select(proj,geo,dest_rate)
+
+  #now there are destinations. I need to merge with excess_dest and calc step2
+  excess_dest_step2 &lt;- merge(excess_dest,adjust4,by=&quot;proj&quot;)
+  excess_dest_step2$step2 &lt;- excess_dest_step2$totmig*excess_dest_step2$dest_rate 
+  excess_dest_step2 &lt;- excess_dest_step2 %&gt;% select(group,geo,sex,age,proj,step2)
+
+  #great. step 2 of migration is ready. lets move people:
+  cohort &lt;- merge(cohort, excess_dest_step2, by=c(&quot;group&quot;, &quot;geo&quot;, &quot;sex&quot;, &quot;age&quot;, &quot;proj&quot;), all.x=TRUE)
+  cohort$step2[is.na(cohort$step2)] &lt;- 0 #missing values
+  cohort$pop &lt;- cohort$pop+cohort$step2 #adding people!
+  cohort$intmig_enter &lt;- cohort$intmig_enter+cohort$step2 
+  cohort &lt;- select(cohort, -step2)
+
+  #now remove step2 people from excess_dest
+  excess_dest_step2 &lt;- excess_dest_step2 %&gt;% group_by(proj, group,age,sex) %&gt;% summarise(step2=sum(step2))
+  excess_dest &lt;- merge(excess_dest, excess_dest_step2, by=c(&quot;group&quot;,&quot;sex&quot;, &quot;age&quot;, &quot;proj&quot;), all.x=TRUE)
+  excess_dest$step2[is.na(excess_dest$step2)] &lt;- 0 #just to make sure
+  excess_dest$totmig &lt;- excess_dest$totmig - excess_dest$step2
+  excess_dest &lt;- select(excess_dest, -step2)
+  rm(excess_dest_step2)
+
+  #PART 5 - step 3 of migration.
+  ###############################
+  # Now there is no space for all the rest. 
+  # Distribute them based on the size of pop in every nafa (by group)
+  excess_dest$housing_needs &lt;- excess_dest$housing_coef * excess_dest$totmig #what are the new housing needs?
+  excess_dest_tot2 &lt;- excess_dest %&gt;% group_by(proj) %&gt;% summarise(housing_needs=sum(housing_needs))
+
+  # so, need a way to split the rest of the population for migration.
+  # Use cohort df to understand the the composition of each nafa by group.
+  dest3 &lt;- cohort %&gt;% group_by(proj,group,geo) %&gt;% summarise(pop=sum(pop))
+  dest3 &lt;- dest3 %&gt;% group_by(proj, group) %&gt;% mutate(p_pop=pop/sum(pop)) %&gt;% select(-pop)
+
+  #merge excess_dest with dest3
+  excess_dest &lt;- merge(excess_dest,dest3,by=c(&quot;proj&quot;, &quot;group&quot;), all.x=TRUE)
+  excess_dest$totmig &lt;- excess_dest$totmig*excess_dest$p_pop #split totmig by destination
+  excess_dest &lt;- excess_dest %&gt;% select(group, geo, sex, age, proj, totmig)
+  rm(dest3)
+
+  #merge excess_dest with cohort
+  cohort &lt;- merge(cohort, excess_dest, by=c(&quot;group&quot;, &quot;geo&quot;, &quot;sex&quot;, &quot;age&quot;, &quot;proj&quot;), all.x=TRUE)
+  cohort$totmig[is.na(cohort$totmig)] &lt;- 0 #just to make sure
+  cohort$pop &lt;- cohort$pop+cohort$totmig
+  cohort$intmig_enter &lt;- cohort$intmig_enter+cohort$totmig
+  cohort &lt;- select(cohort, -totmig)
+
+  #finished. all totmig was distributed.
+
+  return(cohort)
+
+}
+</code></pre>
+
+<h2>Fit model aggregates to the CBS National Model</h2>
+
+<p>After each period in the model, the population is fitted to the total populations of the CBS model.</p>
+
+<h4>Input:</h4>
+
+<ul>
+<li><code>results</code> - cohort data</li>
+<li><code>CBS2065</code> - data from CBS</li>
+</ul>
+
+<h4>Output:</h4>
+
+<ul>
+<li><code>results_fitted</code> - results after fit to CBS data</li>
+</ul>
+
+<pre><code class="r">fit_model &lt;- function(results, CBS2065){
+  results$cbs_group[results$group %in% groups[3]] &lt;- &quot;haredi&quot;
+  results$cbs_group[results$group %in% groups[1:2]] &lt;- &quot;jew&quot;
+  results$cbs_group[results$group %in% groups[4:6]] &lt;- &quot;arab&quot;
+  results$cbs_group &lt;- factor(results$cbs_group)
+
+  df1 &lt;- results %&gt;% group_by(year, cbs_group, sex, age, proj) %&gt;% summarise(pop=sum(pop))
+  df2 &lt;- left_join(df1, CBS2065, by = c(&quot;year&quot;, &quot;cbs_group&quot;, &quot;sex&quot;, &quot;age&quot;, &quot;proj&quot;)) 
+  df2$c &lt;- df2$pop.y/df2$pop.x #create coefs
+  df2 &lt;- select(df2, -pop.x, -pop.y)
+  results_fitted &lt;- left_join(results, df2,by = c(&quot;sex&quot;, &quot;age&quot;, &quot;proj&quot;, &quot;year&quot;, &quot;cbs_group&quot;))
+  results_fitted$pop &lt;- results_fitted$pop * results_fitted$c
+  results_fitted &lt;- select(results_fitted, -c, -cbs_group)
+
+  return(results_fitted)
+}
+</code></pre>
+
+</body>
+
+</html>
